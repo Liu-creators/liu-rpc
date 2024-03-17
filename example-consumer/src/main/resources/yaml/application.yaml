@@ -1,0 +1,9 @@
+rpc:
+  name: yurpc
+  version: 2.0
+  serverPort: 8081
+  mock: false
+  serializer: jdk
+  registryConfig:
+    registry: etcd
+    address: localhost:2379
