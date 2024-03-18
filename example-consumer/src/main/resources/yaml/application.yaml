@@ -4,6 +4,8 @@ rpc:
   serverPort: 8081
   mock: false
   serializer: jdk
+  loadBalancer: consistentHash
+  retryStrategy: no1
   registryConfig:
     registry: etcd
     address: localhost:2379
