@@ -8,15 +8,12 @@ import com.yupi.yurpc.model.ServiceMetaInfo;
 import com.yupi.yurpc.registry.LocalRegistry;
 import com.yupi.yurpc.registry.Registry;
 import com.yupi.yurpc.registry.RegistryFactory;
-import com.yupi.yurpc.server.HttpServer;
-import com.yupi.yurpc.server.VertxHttpServer;
-import com.yupi.yurpc.server.tpc.VertxTcpClient;
 import com.yupi.yurpc.server.tpc.VertxTcpServer;
 
 /**
  * 服务提供者示例
  */
-public class ProviderExample {
+public class ProviderExample_old {
     public static void main(String[] args) {
         // Rpc框架初始化
         RpcApplication.init();
