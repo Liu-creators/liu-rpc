@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -23,11 +20,11 @@ public class SpiLoader {
     /**
      * 存储已加载的类：接口名=>（key=>实现类）
      */
-    private static Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
     /**
      * 对象实例缓存（避免重复new），类路径 => 对象实例，单例模式
      */
-    private static Map<String, Object> instanceCache = new ConcurrentHashMap<>();
+    private static final Map<String, Object> instanceCache = new ConcurrentHashMap<>();
     /**
      * 系统定义 SPI 目录
      */
@@ -43,7 +40,7 @@ public class SpiLoader {
     /**
      * 动态加载的类列表
      */
-    private static final List<Class<?>> LOAD_CLASS_LIST = Arrays.asList(Serializer.class);
+    private static final List<Class<?>> LOAD_CLASS_LIST = Collections.singletonList(Serializer.class);
 
     public static void loadAll() {
         log.info("加载所有 SPI");

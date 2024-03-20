@@ -38,7 +38,7 @@ public class ConfigUtils {
         }
         configFileBuilder.append(".properties");
         Props props = new Props(configFileBuilder.toString());
-        System.out.println(configFileBuilder.toString());
+        System.out.println(configFileBuilder);
         return props.toBean(tClass, prefix);
     }
 

@@ -8,18 +8,12 @@
     <artifactId>example-consumer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.yupi</groupId>
             <artifactId>yu-rpc-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.yupi</groupId>
             <artifactId>example-common</artifactId>
@@ -29,7 +23,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.25</version>
+            <version>5.8.16</version>
         </dependency>
         <!-- https://projectlombok.org/ -->
         <dependency>
@@ -38,7 +32,18 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
