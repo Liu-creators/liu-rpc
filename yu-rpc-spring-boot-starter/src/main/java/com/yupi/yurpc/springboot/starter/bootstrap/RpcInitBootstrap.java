@@ -2,6 +2,7 @@ package com.yupi.yurpc.springboot.starter.bootstrap;
 
 import com.yupi.yurpc.RpcApplication;
 import com.yupi.yurpc.config.RpcConfig;
+import com.yupi.yurpc.server.VertxHttpServer;
 import com.yupi.yurpc.server.tpc.VertxTcpServer;
 import com.yupi.yurpc.springboot.starter.annotation.EnableRpc;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,10 @@ public class RpcInitBootstrap implements ImportBeanDefinitionRegistrar {
         // 启动服务器
         if (needServer) {
             log.info("启动 server");
-            VertxTcpServer vertxTcpServer = new VertxTcpServer();
-            vertxTcpServer.doStart(rpcConfig.getServerPort());
+//            VertxTcpServer vertxTcpServer = new VertxTcpServer();
+//            vertxTcpServer.doStart(rpcConfig.getServerPort());
+            VertxHttpServer vertxHttpServer = new VertxHttpServer();
+            vertxHttpServer.doStart(rpcConfig.getServerPort());
         } else {
             log.info("不启动 server");
         }

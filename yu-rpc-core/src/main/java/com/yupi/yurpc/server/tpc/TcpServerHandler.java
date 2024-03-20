@@ -56,6 +56,7 @@ public class TcpServerHandler implements Handler<NetSocket> {
             ProtocolMessage<RpcResponse> responseProtocolMessage = new ProtocolMessage<>(header, rpcResponse);
             try {
                 Buffer encode = ProtocolMessageEncoder.encode(responseProtocolMessage);
+                System.out.println(encode.toString()+"-----------------TCP");
                 socket.write(encode);
             } catch (IOException e) {
                 throw new RuntimeException("协议消息编码错误");

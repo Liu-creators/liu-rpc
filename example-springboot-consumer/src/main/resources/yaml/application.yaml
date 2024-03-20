@@ -4,8 +4,8 @@ rpc:
   serverPort: 8081
   mock: false
   serializer: jdk
-  loadBalancer: roundRobin
-  retryStrategy: no1
+  loadBalancer: random
+  retryStrategy: fixedInterval
   tolerantStrategy: failSafe
   registryConfig:
     registry: etcd

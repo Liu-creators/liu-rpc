@@ -13,8 +13,11 @@ public class RetryStrategyTest {
     public void doRetry() {
         try {
             RpcResponse rpcResponse = retryStrategy.doRetry(() -> {
-                System.out.println("测试重试");
-                throw new RuntimeException("模拟重试失败");
+                // 模拟一个可能会抛出异常的操作
+                if (Math.random() < 0.5) {
+                    throw new Exception("模拟的异常");
+                }
+                return new RpcResponse("20",String.class,"ok",null);
             });
             System.out.println(rpcResponse);
         } catch (Exception e) {

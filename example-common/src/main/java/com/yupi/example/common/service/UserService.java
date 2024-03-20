@@ -21,4 +21,12 @@ public interface UserService {
     default int getNumber() {
         return 1;
     }
+
+    /**
+     * 两数相加
+     * @param x
+     * @param y
+     * @return
+     */
+    Integer addTowNum(Integer x, Integer y);
 }

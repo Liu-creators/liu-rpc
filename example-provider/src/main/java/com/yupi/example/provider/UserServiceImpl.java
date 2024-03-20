@@ -12,4 +12,9 @@ public class UserServiceImpl implements UserService {
         System.out.println("用户名: " + user.getName());
         return user;
     }
+
+    @Override
+    public Integer addTowNum(Integer x, Integer y) {
+        return null;
+    }
 }

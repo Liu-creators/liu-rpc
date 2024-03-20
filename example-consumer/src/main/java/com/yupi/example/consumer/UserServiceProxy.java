@@ -47,4 +47,9 @@ public class UserServiceProxy implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Integer addTowNum(Integer x, Integer y) {
+        return null;
+    }
 }

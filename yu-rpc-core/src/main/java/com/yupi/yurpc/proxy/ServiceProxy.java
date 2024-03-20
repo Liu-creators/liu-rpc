@@ -18,6 +18,7 @@ import com.yupi.yurpc.registry.Registry;
 import com.yupi.yurpc.registry.RegistryFactory;
 import com.yupi.yurpc.serializer.Serializer;
 import com.yupi.yurpc.serializer.SerializerFactory;
+import com.yupi.yurpc.server.VertxHttpClient;
 import com.yupi.yurpc.server.tpc.VertxTcpClient;
 
 
@@ -36,8 +37,6 @@ public class ServiceProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        // 使用自定义序列化器
-        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         String serviceName = method.getDeclaringClass().getName();
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
@@ -47,8 +46,6 @@ public class ServiceProxy implements InvocationHandler {
                 .args(args)
                 .build();
         try {
-            // 序列化
-            byte[] bodyBytes = serializer.serialize(rpcRequest);
             // 从注册中心获取服务提供者请求地址
             RpcConfig rpcConfig = RpcApplication.getRpcConfig();
             Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistry());
@@ -71,14 +68,15 @@ public class ServiceProxy implements InvocationHandler {
             try {
                 RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
                  rpcResponse = retryStrategy.doRetry(() ->
-                        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+//                        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+                            VertxHttpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
                 );
             } catch (Exception e) {
                 TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
                 rpcResponse = tolerantStrategy.doTolerant(null, e);
             }
             return rpcResponse.getData();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("调用失败");
         }
     }

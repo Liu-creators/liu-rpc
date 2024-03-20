@@ -26,10 +26,10 @@ public class FixedIntervalRetryStrategy implements RetryStrategy{
                 .retryIfExceptionOfType(Exception.class)  // 指定当出现Exception异常时重试（重试条件）
                 .withWaitStrategy(WaitStrategies.fixedWait(3L, TimeUnit.SECONDS)) // 选择fixedWait固定时间间隔策略（重试等待策略）
                 .withStopStrategy(StopStrategies.stopAfterAttempt(3)) //超过最大重试次数停止（重试停止策略）
-                .withRetryListener(new RetryListener() { // 监听重试（重试工作）
+                .withRetryListener(new RetryListener() { // 监听重试（尝试工作）
                     @Override
                     public <V> void onRetry(Attempt<V> attempt) {
-                        log.info("重试次数 {}", attempt.getAttemptNumber());
+                        log.info("尝试次数 {}", attempt.getAttemptNumber());
                     }
                 })
                 .build();

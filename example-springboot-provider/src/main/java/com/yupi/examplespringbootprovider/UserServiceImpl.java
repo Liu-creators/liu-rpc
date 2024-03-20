@@ -17,4 +17,14 @@ public class UserServiceImpl implements UserService {
         user.setName("处理后："+user.getName());
         return user;
     }
+
+    @Override
+    public Integer addTowNum(Integer x, Integer y) {
+        if (x != null && y != null) {
+            return x + y;
+        } else {
+            System.out.println("参数有误！");
+            return null;
+        }
+    }
 }
